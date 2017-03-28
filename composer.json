@@ -1,0 +1,20 @@
+{
+    "name": "rwypior/tntcourier",
+    "description": "TNT courier client",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Robert Wypiór",
+            "email": "robwypior@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "RWypior\\TNTCourier\\": "src"
+        }
+    }
+}
