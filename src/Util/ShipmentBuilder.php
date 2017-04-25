@@ -87,6 +87,14 @@ class ShipmentBuilder
         $details->setDescription($this->description);
         $details->getPackage()->setDescription($this->description);
 
+        $price = 0;
+        foreach($this->articles as $article)
+        {
+            /** @var Article $article */
+            $price += $article->getInvoiceValue();
+        }
+        $details->setGoodsValue($price);
+
         return $shipment;
     }
 }
