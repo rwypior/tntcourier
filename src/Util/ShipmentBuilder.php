@@ -20,6 +20,7 @@ class ShipmentBuilder
 
     private $articles = [];
 
+    private $deliveryInstructions = '';
     private $description = '';
     private $conref = NULL;
 
@@ -64,6 +65,28 @@ class ShipmentBuilder
         return $this;
     }
 
+    public function getDeliveryInstructions(): string
+    {
+        return $this->deliveryInstructions;
+    }
+
+    public function setDeliveryInstructions(string $deliveryInstructions)
+    {
+        $this->deliveryInstructions = $deliveryInstructions;
+        return $this;
+    }
+
+    public function getTotalPrice()
+    {
+        $price = 0;
+        foreach($this->articles as $article)
+        {
+            /** @var Article $article */
+            $price += $article->getInvoiceValue();
+        }
+        return $price;
+    }
+
     public function getShipment()
     {
         $sender = $this->from;
@@ -74,6 +97,8 @@ class ShipmentBuilder
         $batch = new ConsignmentBatch($sender, $consignment);
 
         $shipment = new Shipment($this->login, $batch);
+
+        $details->setDeliveryInst($this->deliveryInstructions);
 
         $shipment->getActivity()->getCreate()->setConref($this->conref);
         $shipment->getActivity()->getShip()->setConref($this->conref);
@@ -87,13 +112,7 @@ class ShipmentBuilder
         $details->setDescription($this->description);
         $details->getPackage()->setDescription($this->description);
 
-        $price = 0;
-        foreach($this->articles as $article)
-        {
-            /** @var Article $article */
-            $price += $article->getInvoiceValue();
-        }
-        $details->setGoodsValue($price);
+        $details->setGoodsValue($this->getTotalPrice());
 
         return $shipment;
     }

@@ -16,7 +16,7 @@ class Article
     {
         $this->description = $this->invoiceDesc = $description;
         $this->weight = $weight;
-        $this->value = $value;
+        $this->invoiceValue = $value;
     }
 
     public function toXml(\SimpleXMLElement $parent)
