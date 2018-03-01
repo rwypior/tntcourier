@@ -31,6 +31,6 @@ class ManifestRequest implements RequestInterface
 
     public function getTarget()
     {
-        return 'http://iConnection.tnt.com:81/ShipperGate2.asp';
+        return RequestInterface::TNT_URL . 'ShipperGate2.asp';
     }
 }

@@ -25,7 +25,7 @@ class DatasetRequest implements RequestInterface
 
     public function getTarget()
     {
-        return 'http://iConnection.tnt.com:81/PriceGate.asp';
+        return RequestInterface::TNT_URL . 'PriceGate.asp';
     }
 
     public function getExpectedResponse()

@@ -4,6 +4,8 @@ namespace RWypior\TNTCourier;
 
 interface RequestInterface
 {
+    const TNT_URL = 'https://iConnection.tnt.com/';
+
     const METHOD_GET = 'GET';
     const METHOD_POST = 'POST';
 
