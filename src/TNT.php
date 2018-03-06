@@ -47,16 +47,16 @@ class TNT
         catch (\GuzzleHttp\Exception\ClientException $ex)
         {
             $code = $ex->getResponse()->getStatusCode();
-            throw new CourierException("Request failed with code $code", CourierException::EXCCODE_REQUEST_FAILED, $ex);
+            throw new CourierException("Request failed with code $code", CourierException::EXCCODE_REQUEST_FAILED, $ex, $request);
         }
         catch (\GuzzleHttp\Exception\ConnectException $ex)
         {
             // This can mean that TNT firewall does not allow your IP address
-            throw new CourierException('Could not connect to courier API', CourierException::EXCCODE_CONNECTION_FAILED, $ex);
+            throw new CourierException('Could not connect to courier API', CourierException::EXCCODE_CONNECTION_FAILED, $ex, $request);
         }
         catch (\Exception $ex)
         {
-            throw new CourierException('Could not send TNT request', CourierException::EXCCODE_UNKNOWN_ERROR, $ex);
+            throw new CourierException('Could not send TNT request', CourierException::EXCCODE_UNKNOWN_ERROR, $ex, $request);
         }
 
         $expectedResponseClass = $request->getExpectedResponse();
